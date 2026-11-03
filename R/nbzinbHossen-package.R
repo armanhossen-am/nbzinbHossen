@@ -7,4 +7,5 @@
 #' No general-purpose optimizer (such as `optim()`) is used.
 #'
 #' @keywords internal
+#' @importFrom stats coef vcov logLik nobs fitted residuals predict
 "_PACKAGE"

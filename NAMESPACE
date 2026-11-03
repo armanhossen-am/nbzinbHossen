@@ -24,3 +24,12 @@ export(nbreg)
 export(nbreg_control)
 export(zinbreg)
 export(zinbreg_control)
+importFrom(stats,
+  coef,
+  fitted,
+  logLik,
+  nobs,
+  predict,
+  residuals,
+  vcov
+)
