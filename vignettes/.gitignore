@@ -1,0 +1,7 @@
+/.quarto/
+**/*.quarto_ipynb
+articles/report_cache/
+articles/report_files/
+articles/*.html
+articles/*.pdf
+articles/*.tex

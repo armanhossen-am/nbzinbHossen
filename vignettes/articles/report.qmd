@@ -62,7 +62,7 @@ $$
 -\log y_i!+\theta\log\theta+y_i\log\mu_i-(\theta+y_i)\log(\theta+\mu_i)\big].
 $$
 
-**IRLS for $\beta$ (θ fixed).** With the log link,
+**IRLS for $\beta$ ($\theta$ fixed).** With the log link,
 $(\partial\mu/\partial\eta)^2=\mu^2$, so Fisher scoring is weighted least
 squares with
 $$
@@ -366,7 +366,7 @@ kable(st, digits = 3)
 > **✍️ TO WRITE (Arman), a short paragraph.** Discuss: are the biases
 > small relative to the MC SD? Do the mean SEs track the MC SDs? Is the
 > coverage near 95%? Note which parameters (e.g. the zero-part intercept,
-> log θ, the binary `x2`) are hardest to estimate, and why that is
+> $\log\theta$, the binary `x2`) are hardest to estimate, and why that is
 > plausible for n = 500.
 
 # Data analysis: NMES1988
@@ -501,7 +501,7 @@ kable(data.frame(Covariate = rownames(s_zz),
 
 > **✍️ TO WRITE (Arman), half a page.** Limitations and extensions. Ideas
 > to consider: EM's linear convergence (iteration counts above) and
-> possible acceleration; SEs for NB treat θ as known; Wald intervals vs
+> possible acceleration; SEs for NB treat $\theta$ as known; Wald intervals vs
 > profile likelihood; local maxima / starting values for EM; offsets only
 > in the count part; possible extensions (hurdle models, ZIP, other links,
 > robust or sandwich SEs).
@@ -510,7 +510,7 @@ kable(data.frame(Covariate = rownames(s_zz),
 
 > **✍️ TO WRITE (Arman), in your own words.** Required by Section 6.1(8):
 > what you asked Claude Code to do; what you verified yourself (e.g.
-> checking the IRLS weights, the E-step $\tau_i$ and the θ score against
+> checking the IRLS weights, the E-step $\tau_i$ and the $\theta$ score against
 > Section 3; comparing numbers with `glm.nb()` / `zeroinfl()`; the
 > prohibited-function grep); and **one concrete example where you had to
 > correct or reject its output.** Make sure the example is something you
