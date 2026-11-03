@@ -1,0 +1,33 @@
+url: https://armanhossen-am.github.io/nbzinbHossen/
+destination: docs
+
+template:
+  bootstrap: 5
+
+navbar:
+  structure:
+    left: [intro, reference, articles]
+    right: [search, github]
+
+reference:
+  - title: Fitting functions
+    contents:
+      - nbreg
+      - zinbreg
+  - title: Control parameters
+    contents:
+      - nbreg_control
+      - zinbreg_control
+  - title: Methods
+    contents:
+      - nbreg-methods
+      - zinbreg-methods
+  - title: Package
+    contents:
+      - nbzinbHossen-package
+
+articles:
+  - title: Project report
+    navbar: ~
+    contents:
+      - articles/report
