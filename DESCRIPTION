@@ -14,7 +14,10 @@ Config/roxygen2/version: 8.1.1
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Suggests:
+    AER,
+    MASS,
     numDeriv,
+    pscl,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Imports: 
