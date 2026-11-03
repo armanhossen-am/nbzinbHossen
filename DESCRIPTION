@@ -1,0 +1,18 @@
+Package: nbzinbHossen
+Title: Negative Binomial and Zero-Inflated Negative Binomial Regression
+    via IRLS
+Version: 0.0.0.9000
+Authors@R: 
+    person("Arman", "Hossen", , "hossena@miamioh.edu", role = c("aut", "cre"))
+Description: Fits negative binomial (NB2) regression by iteratively
+    reweighted least squares alternated with Newton-Raphson updates of the
+    dispersion parameter, and zero-inflated negative binomial regression
+    by an EM algorithm whose M-steps are IRLS fits. Written for the STA
+    651 final project.
+License: MIT + file LICENSE
+Config/roxygen2/version: 8.1.1
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
