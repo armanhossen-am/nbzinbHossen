@@ -3,7 +3,7 @@
 ^CLAUDE\.md$
 ^report$
 ^\.github$
-^vignettes/articles$
+^vignettes$
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
