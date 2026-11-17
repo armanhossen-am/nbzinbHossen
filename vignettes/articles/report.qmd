@@ -269,7 +269,7 @@ We compare our fits with `glm.nb()` (with `epsilon = 1e-10`) and
 `AER::NMES1988` (n = 4406), using the full models of Section 5 of the
 project description. @tbl-agree summarizes the maximum absolute
 differences. Every one is far inside the required tolerance. The
-side-by-side estimates are in @tbl-bio-nb to @tbl-nmes-zinb.
+side-by-side estimates are in the appendix (@tbl-bio-nb to @tbl-nmes-zinb).
 
 ```{r}
 #| label: tbl-agree
@@ -284,30 +284,6 @@ agree <- data.frame(
   check.names = FALSE, row.names = NULL)
 agree[, -1] <- lapply(agree[, -1], function(v) formatC(v, format = "e", digits = 1))
 kable(agree, align = "lrrrrrr")
-```
-
-```{r}
-#| label: tbl-bio-nb
-#| tbl-cap: "bioChemists, NB: nbreg() vs glm.nb()."
-kable(b_bio_nb$tab, digits = 6)
-```
-
-```{r}
-#| label: tbl-bio-zinb
-#| tbl-cap: "bioChemists, ZINB: zinbreg() vs zeroinfl()."
-kable(b_bio_zinb$tab, digits = 5)
-```
-
-```{r}
-#| label: tbl-nmes-nb
-#| tbl-cap: "NMES1988, NB: nbreg() vs glm.nb()."
-kable(b_nmes_nb$tab, digits = 6)
-```
-
-```{r}
-#| label: tbl-nmes-zinb
-#| tbl-cap: "NMES1988, ZINB: zinbreg() vs zeroinfl()."
-kable(b_nmes_zinb$tab, digits = 5)
 ```
 
 ```{r}
@@ -333,6 +309,21 @@ slower than `zeroinfl()` because EM converges linearly: it needed
 `r b_bio_zinb$iter` iterations on bioChemists and `r b_nmes_zinb$iter` on
 NMES1988, each with a full IRLS fit in both M-steps. Every fit still takes
 under a second.
+
+```{r}
+#| label: fig-em
+#| fig-cap: "EM convergence of zinbreg() on NMES1988. Left: the observed-data log-likelihood at every iteration; the dashed line is the value from zeroinfl(). Right: the distance to the final log-likelihood, on a log scale."
+#| fig-height: 3.2
+m_em <- zinbreg(f_nmes_zinb, data = NMES1988)
+par(mfrow = c(1, 2), mar = c(4.2, 4.5, 1, 1))
+plot(m_em, reference = b_nmes_zinb$ll[2])
+plot(m_em, which = "gap")
+```
+
+@fig-em shows that the log-likelihood never decreases, as EM guarantees.
+Almost all of the gain comes in the first few iterations. After that, the
+distance to the optimum shrinks by a roughly constant factor per iteration,
+a straight line on the log scale: the linear convergence typical of EM.
 
 # Simulation study
 
@@ -536,3 +527,29 @@ kable(data.frame(Covariate = rownames(s_zz),
 - Wickham, H. and Bryan, J. (2023). *R Packages* (2nd ed.). O'Reilly.
 - Zeileis, A., Kleiber, C. and Jackman, S. (2008). Regression models for
   count data in R. *Journal of Statistical Software*, 27(8), 1–25.
+
+# Appendix: side-by-side estimates {.unnumbered}
+
+```{r}
+#| label: tbl-bio-nb
+#| tbl-cap: "bioChemists, NB: nbreg() vs glm.nb()."
+kable(b_bio_nb$tab, digits = 6)
+```
+
+```{r}
+#| label: tbl-bio-zinb
+#| tbl-cap: "bioChemists, ZINB: zinbreg() vs zeroinfl()."
+kable(b_bio_zinb$tab, digits = 5)
+```
+
+```{r}
+#| label: tbl-nmes-nb
+#| tbl-cap: "NMES1988, NB: nbreg() vs glm.nb()."
+kable(b_nmes_nb$tab, digits = 6)
+```
+
+```{r}
+#| label: tbl-nmes-zinb
+#| tbl-cap: "NMES1988, ZINB: zinbreg() vs zeroinfl()."
+kable(b_nmes_zinb$tab, digits = 5)
+```
