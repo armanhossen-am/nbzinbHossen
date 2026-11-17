@@ -15,6 +15,7 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Suggests:
     AER,
+    grDevices,
     MASS,
     numDeriv,
     pscl,
@@ -22,7 +23,9 @@ Suggests:
 Config/testthat/edition: 3
 Imports: 
     Formula,
-    stats
+    graphics,
+    stats,
+    utils
 Config/Needs/website: rmarkdown, knitr, quarto, MASS, pscl, AER, numDeriv
 URL: https://github.com/armanhossen-am/nbzinbHossen, https://armanhossen-am.github.io/nbzinbHossen/
 BugReports: https://github.com/armanhossen-am/nbzinbHossen/issues

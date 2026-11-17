@@ -12,6 +12,15 @@ dispersion parameter. Zero-inflated negative binomial regression is
 fitted with \code{\link[=zinbreg]{zinbreg()}} by an EM algorithm whose M-steps are IRLS fits.
 No general-purpose optimizer (such as \code{optim()}) is used.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/armanhossen-am/nbzinbHossen}
+  \item \url{https://armanhossen-am.github.io/nbzinbHossen/}
+  \item Report bugs at \url{https://github.com/armanhossen-am/nbzinbHossen/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Arman Hossen \email{hossena@miamioh.edu}
 

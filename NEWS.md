@@ -24,9 +24,11 @@ First release, submitted for the STA 651 final project.
   `BIC()` work through `logLik()`.
 * `predict.zinbreg()` supports `type = "response"`, `"count"`, `"zero"` and
   `"prob"`, with `newdata`.
+* `plot()` for `zinbreg` fits shows the observed-data log-likelihood at every
+  EM iteration, or its distance to the final value on a log scale.
 
 ## Checks
 
-* 82 tests compare both fitting functions with the reference implementations
+* 87 tests compare both fitting functions with the reference implementations
   and cover offsets, weights, warnings and input errors.
 * Benchmark and simulation scripts are in `inst/benchmark/`.

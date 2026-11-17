@@ -213,3 +213,54 @@ predict.zinbreg <- function(object, newdata,
            out
          })
 }
+
+#' Plot the EM convergence of a zinbreg fit
+#'
+#' Shows the observed-data log-likelihood at every EM iteration of
+#' [zinbreg()]. EM never decreases the log-likelihood, so the curve climbs
+#' monotonically to its final value.
+#'
+#' @param x An object of class `"zinbreg"`.
+#' @param which `"loglik"` (default) plots the log-likelihood against the
+#'   iteration. `"gap"` plots the distance to the final value,
+#'   \eqn{\ell_{final} - \ell_t}, on a log scale; a straight line there
+#'   means linear convergence.
+#' @param reference Optional log-likelihood of another fit of the same model,
+#'   for example `logLik()` of `pscl::zeroinfl()`, drawn as a dashed line when
+#'   `which = "loglik"`.
+#' @param ... Further graphical arguments passed to [graphics::plot()], such
+#'   as `main` or `col`.
+#'
+#' @return Invisibly, a data frame with columns `iteration` and `loglik`.
+#'   Iteration 0 is the log-likelihood at the starting values.
+#' @export
+#' @examples
+#' data("bioChemists", package = "pscl")
+#' fit <- zinbreg(art ~ fem + kid5 + ment | ment, data = bioChemists)
+#' plot(fit)
+#' plot(fit, which = "gap")
+plot.zinbreg <- function(x, which = c("loglik", "gap"), reference = NULL, ...) {
+  which <- match.arg(which)
+  tr <- data.frame(iteration = seq_along(x$loglik_trace) - 1L,
+                   loglik = x$loglik_trace)
+  if (which == "loglik") {
+    args <- list(x = tr$iteration, y = tr$loglik, type = "o", pch = 20,
+                 cex = 0.5, xlab = "EM iteration",
+                 ylab = "Observed-data log-likelihood",
+                 ylim = range(c(tr$loglik, reference)))
+    do.call(graphics::plot, utils::modifyList(args, list(...)))
+    if (!is.null(reference)) {
+      graphics::abline(h = as.numeric(reference), lty = 2)
+    }
+  } else {
+    # Distance to the converged value; the final iteration has gap 0 and is
+    # left out of the log scale.
+    gap <- x$loglik - tr$loglik
+    keep <- gap > 0
+    args <- list(x = tr$iteration[keep], y = gap[keep], log = "y", type = "o",
+                 pch = 20, cex = 0.5, xlab = "EM iteration",
+                 ylab = "Distance to final log-likelihood")
+    do.call(graphics::plot, utils::modifyList(args, list(...)))
+  }
+  invisible(tr)
+}

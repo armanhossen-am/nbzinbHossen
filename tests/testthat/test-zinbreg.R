@@ -131,3 +131,17 @@ test_that("zinbreg methods agree with zeroinfl", {
   expect_output(print(fit), "Zero-inflation")
   expect_output(print(s), "Log\\(theta\\)")
 })
+
+test_that("plot.zinbreg draws the EM log-likelihood trace", {
+  skip_if_not_installed("pscl")
+  data("bioChemists", package = "pscl")
+  fit <- zinbreg(art ~ kid5 + ment | ment, data = bioChemists)
+  grDevices::pdf(NULL)
+  on.exit(grDevices::dev.off())
+  tr <- plot(fit)
+  expect_equal(nrow(tr), fit$iter + 1L)
+  expect_equal(tr$loglik[nrow(tr)], fit$loglik)
+  expect_true(all(diff(tr$loglik) >= -1e-8))
+  expect_no_error(plot(fit, which = "gap"))
+  expect_no_error(plot(fit, reference = fit$loglik, main = "EM trace"))
+})

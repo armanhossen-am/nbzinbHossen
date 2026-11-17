@@ -22,6 +22,7 @@ reference:
     contents:
       - nbreg-methods
       - zinbreg-methods
+      - plot.zinbreg
   - title: Package
     contents:
       - nbzinbHossen-package
