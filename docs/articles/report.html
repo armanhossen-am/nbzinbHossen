@@ -272,29 +272,29 @@ Table 2: Elapsed time (seconds) of one fit, and log-likelihoods.
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">bioChemists NB</td>
-<td style="text-align: right;">0.010</td>
-<td style="text-align: right;">0.024</td>
+<td style="text-align: right;">0.009</td>
+<td style="text-align: right;">0.023</td>
 <td style="text-align: right;">-1560.958</td>
 <td style="text-align: right;">-1560.958</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">bioChemists ZINB</td>
-<td style="text-align: right;">0.564</td>
-<td style="text-align: right;">0.058</td>
+<td style="text-align: right;">0.563</td>
+<td style="text-align: right;">0.061</td>
 <td style="text-align: right;">-1549.991</td>
 <td style="text-align: right;">-1549.991</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">NMES1988 NB</td>
 <td style="text-align: right;">0.041</td>
-<td style="text-align: right;">0.088</td>
+<td style="text-align: right;">0.086</td>
 <td style="text-align: right;">-12170.554</td>
 <td style="text-align: right;">-12170.554</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NMES1988 ZINB</td>
-<td style="text-align: right;">1.430</td>
-<td style="text-align: right;">0.263</td>
+<td style="text-align: right;">1.420</td>
+<td style="text-align: right;">0.264</td>
 <td style="text-align: right;">-12090.722</td>
 <td style="text-align: right;">-12090.722</td>
 </tr>
@@ -644,25 +644,20 @@ Table 7: ZINB zero part: odds ratios of being a structural zero (never visiting
 </figure>
 </div>
 </div>
-<p><strong>Dispersion.</strong> Under the NB model, <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>θ</mi><mo accent="true">̂</mo></mover><mo>=</mo><mn>1.21</mn></mrow><annotation encoding="application/x-tex">\hat\theta = 1.21</annotation></semantics></math>. At the mean of 5.77 visits, this implies a variance of about <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5.77</mn><mo>+</mo><msup><mn>5.77</mn><mn>2</mn></msup><mi>/</mi><mn>1.21</mn><mo>≈</mo><mn>33</mn></mrow><annotation encoding="application/x-tex">5.77 + 5.77^2/1.21 \approx 33</annotation></semantics></math>, against 5.77 under a Poisson model.</p>
-<p><strong>Count part.</strong> The incidence rate ratios in <a href="#tbl-irr" class="quarto-xref">Table 6</a> describe how often people visit, among those at risk of visiting, holding the other covariates fixed. All seven effects are significant at 5% in both models and point the same way. In the ZINB count part:</p>
+<p>The number of doctor visits varies widely. The NB model allows more variation than the Poisson model. At a mean of 5.77 visits, the estimated NB variance is about 33.</p>
+<p>In the ZINB count part, we compare people while keeping the other factors the same:</p>
 <ul>
-<li>Each extra hospital stay goes with about 22% more office visits.</li>
-<li>People in poor health make about 33% more visits than those in average health; those in excellent health about 27% fewer.</li>
-<li>Each additional chronic condition raises expected visits by about 14%.</li>
-<li>Men make about 8% fewer visits than women.</li>
-<li>Each extra year of schooling adds about 2%.</li>
-<li>Private insurance goes with about 13% more visits.</li>
+<li>Each extra hospital stay is linked to 22% more expected visits.</li>
+<li>Poor health is linked to 33% more visits than average health.</li>
+<li>Excellent health is linked to 27% fewer visits than average health.</li>
+<li>Each extra chronic condition is linked to 14% more visits.</li>
+<li>Men have 8% fewer expected visits than women.</li>
+<li>Each extra year of schooling is linked to 2% more visits.</li>
+<li>Private insurance is linked to 13% more visits.</li>
 </ul>
-<p><strong>Zero part.</strong> The odds ratios in <a href="#tbl-or" class="quarto-xref">Table 7</a> describe the chance of being a structural non-user, someone who would not see a physician at all.</p>
-<ul>
-<li>Each additional chronic condition cuts the odds of being a non-user by about 71%, the strongest effect.</li>
-<li>Private insurance lowers those odds by about 69%.</li>
-<li>Each year of schooling lowers them by about 8%.</li>
-<li>Men have almost twice the odds of women of being non-users.</li>
-<li>Hospital stays point the same way (OR 0.45) but are not significant at 5% (p = 0.057).</li>
-</ul>
-<p><strong>NB versus ZINB.</strong> The two models agree on direction, but several effects shrink towards 1 in the ZINB count part: chronic conditions (1.19 to 1.14), gender (0.88 to 0.92) and especially insurance (1.25 to 1.13). The NB model mixes two questions, whether someone visits at all and how often. ZINB separates them. Insurance shows this most clearly. Much of its NB effect comes from insured people being far less likely to be non-users (zero-part OR 0.31). Among people who do visit, insurance raises visits by a more modest 13%.</p>
+<p>All these relationships are statistically significant at the 5% level.</p>
+<p>The zero part describes the odds of being in the model’s non-user group. Each extra chronic condition lowers these odds by 71%. Private insurance lowers them by 69%. Each extra year of schooling lowers them by 8%. Men have almost twice the odds of women. Hospital stays are linked to lower odds, but this result is not statistically significant.</p>
+<p>Both models show similar patterns. Some differences are smaller in the ZINB count part. For example, insurance is linked to 25% more visits in NB but 13% more in ZINB. ZINB also shows that insured people are less likely to belong to the non-user group. People outside this group can still have zero visits.</p>
 </section><section class="level2" data-number="6.4"><h3 data-number="6.4" id="which-model">
 <span class="header-section-number">6.4</span> Which model?<a class="anchor" aria-label="anchor" href="#which-model"></a>
 </h3>
@@ -687,7 +682,7 @@ Table 7: ZINB zero part: odds ratios of being a structural zero (never visiting
 </section><section class="section level2" data-number="8"><h2 data-number="8" id="ai-use-statement">
 <span class="header-section-number">8</span> AI-use statement<a class="anchor" aria-label="anchor" href="#ai-use-statement"></a>
 </h2>
-<p>I used Claude Code throughout this project, as the assignment intended. Claude Code set up the package structure and CLAUDE.md, and wrote the fitting code (IRLS for the NB coefficients, Newton–Raphson for <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">log</mi><mo>⁡</mo></mrow><mi>θ</mi></mrow><annotation encoding="application/x-tex">\log\theta</annotation></semantics></math>, the EM algorithm and the analytic Hessian), the S3 methods, the tests, the benchmark and simulation scripts, the GitHub Actions workflow and the pkgdown configuration. It also drafted every section of this report and all of its code; I rewrote the introduction in my own words and edited the other sections.</p>
+<p>I used Claude Code throughout this project, as the assignment intended. Claude Code set up the package structure and CLAUDE.md, and wrote the fitting code (IRLS for the NB coefficients, Newton–Raphson for <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">log</mi><mo>⁡</mo></mrow><mi>θ</mi></mrow><annotation encoding="application/x-tex">\log\theta</annotation></semantics></math>, the EM algorithm and the analytic Hessian), the S3 methods, the tests, the benchmark and simulation scripts, the GitHub Actions workflow and the pkgdown configuration. It also drafted the other sections of this report and all of its code. I wrote the interpretation of the NMES1988 results (the Interpretation subsection) myself, rewrote the introduction in my own words, and edited the other sections.</p>
 <p><strong>What I verified myself:</strong> I tested the package myself in R. I installed it from GitHub with <code>devtools::install_github("armanhossen-am/nbzinbHossen")</code>, and it installed without errors. I then ran the models myself, including the <code><a href="../reference/zinbreg.html">zinbreg()</a></code> example on the bioChemists data, and everything ran correctly: the summary showed the count and zero-inflation coefficient tables, theta and the log-likelihood, and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> returned the structural-zero probabilities.</p>
 <p><strong>One improvement I directed:</strong> I asked Claude Code to add a figure showing the EM log-likelihood climbing at every iteration. I had it add this to the package as a <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> method for <code>zinbreg</code> fits, with a test and documentation, and commit both changes to GitHub.</p>
 </section><section class="section level2" data-number="9"><h2 data-number="9" id="references">

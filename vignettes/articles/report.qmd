@@ -507,42 +507,34 @@ kable(data.frame(Covariate = rownames(s_zz),
       row.names = FALSE, align = "lcc")
 ```
 
-**Dispersion.** Under the NB model, $\hat\theta = 1.21$. At the mean of 5.77
-visits, this implies a variance of about $5.77 + 5.77^2/1.21 \approx 33$,
-against 5.77 under a Poisson model.
+The number of doctor visits varies widely. The NB model allows more
+variation than the Poisson model. At a mean of 5.77 visits, the estimated NB
+variance is about 33.
 
-**Count part.** The incidence rate ratios in @tbl-irr describe how often
-people visit, among those at risk of visiting, holding the other covariates
-fixed. All seven effects are significant at 5% in both models and point the
-same way. In the ZINB count part:
+In the ZINB count part, we compare people while keeping the other factors
+the same:
 
-- Each extra hospital stay goes with about 22% more office visits.
-- People in poor health make about 33% more visits than those in average
-  health; those in excellent health about 27% fewer.
-- Each additional chronic condition raises expected visits by about 14%.
-- Men make about 8% fewer visits than women.
-- Each extra year of schooling adds about 2%.
-- Private insurance goes with about 13% more visits.
+- Each extra hospital stay is linked to 22% more expected visits.
+- Poor health is linked to 33% more visits than average health.
+- Excellent health is linked to 27% fewer visits than average health.
+- Each extra chronic condition is linked to 14% more visits.
+- Men have 8% fewer expected visits than women.
+- Each extra year of schooling is linked to 2% more visits.
+- Private insurance is linked to 13% more visits.
 
-**Zero part.** The odds ratios in @tbl-or describe the chance of being a
-structural non-user, someone who would not see a physician at all.
+All these relationships are statistically significant at the 5% level.
 
-- Each additional chronic condition cuts the odds of being a non-user by
-  about 71%, the strongest effect.
-- Private insurance lowers those odds by about 69%.
-- Each year of schooling lowers them by about 8%.
-- Men have almost twice the odds of women of being non-users.
-- Hospital stays point the same way (OR 0.45) but are not significant at 5%
-  (p = 0.057).
+The zero part describes the odds of being in the model's non-user group.
+Each extra chronic condition lowers these odds by 71%. Private insurance
+lowers them by 69%. Each extra year of schooling lowers them by 8%. Men have
+almost twice the odds of women. Hospital stays are linked to lower odds, but
+this result is not statistically significant.
 
-**NB versus ZINB.** The two models agree on direction, but several effects
-shrink towards 1 in the ZINB count part: chronic conditions (1.19 to 1.14),
-gender (0.88 to 0.92) and especially insurance (1.25 to 1.13). The NB model
-mixes two questions, whether someone visits at all and how often. ZINB
-separates them. Insurance shows this most clearly. Much of its NB effect
-comes from insured people being far less likely to be non-users (zero-part
-OR 0.31). Among people who do visit, insurance raises visits by a more
-modest 13%.
+Both models show similar patterns. Some differences are smaller in the ZINB
+count part. For example, insurance is linked to 25% more visits in NB but
+13% more in ZINB. ZINB also shows that insured people are less likely to
+belong to the non-user group. People outside this group can still have zero
+visits.
 
 ## Which model?
 
@@ -589,9 +581,10 @@ Claude Code set up the package structure and CLAUDE.md, and wrote the
 fitting code (IRLS for the NB coefficients, Newton–Raphson for $\log\theta$,
 the EM algorithm and the analytic Hessian), the S3 methods, the tests, the
 benchmark and simulation scripts, the GitHub Actions workflow and the
-pkgdown configuration. It also drafted every section of this report and all
-of its code; I rewrote the introduction in my own words and edited the other
-sections.
+pkgdown configuration. It also drafted the other sections of this report
+and all of its code. I wrote the interpretation of the NMES1988 results
+(the Interpretation subsection) myself, rewrote the introduction in my own
+words, and edited the other sections.
 
 **What I verified myself:** I tested the package myself in R. I installed it
 from GitHub with `devtools::install_github("armanhossen-am/nbzinbHossen")`,
